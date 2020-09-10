@@ -1,0 +1,22 @@
+C:\Users\Excel Engineer\source\repos\AMXXVaultViewer\bin\Debug\AMXXVaultViewer.exe
+C:\Users\Excel Engineer\source\repos\AMXXVaultViewer\bin\Debug\AMXXVaultViewer.pdb
+C:\Users\Excel Engineer\source\repos\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.csprojAssemblyReference.cache
+C:\Users\Excel Engineer\source\repos\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.Properties.Resources.resources
+C:\Users\Excel Engineer\source\repos\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.csproj.GenerateResource.cache
+C:\Users\Excel Engineer\source\repos\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.csproj.CoreCompileInputs.cache
+C:\Users\Excel Engineer\source\repos\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.exe
+C:\Users\Excel Engineer\source\repos\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.pdb
+C:\Users\Excel Engineer\source\repos\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.Form1.resources
+C:\Users\Trevor\Desktop\AMXXVaultViewer\bin\Debug\AMXXVaultViewer.exe
+C:\Users\Trevor\Desktop\AMXXVaultViewer\bin\Debug\AMXXVaultViewer.pdb
+C:\Users\Trevor\Desktop\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.csprojAssemblyReference.cache
+C:\Users\Trevor\Desktop\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.Properties.Resources.resources
+C:\Users\Trevor\Desktop\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.csproj.GenerateResource.cache
+C:\Users\Trevor\Desktop\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.csproj.CoreCompileInputs.cache
+C:\Users\Trevor\Desktop\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.exe
+C:\Users\Trevor\Desktop\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.pdb
+C:\Users\Trevor\Desktop\AMXXVaultViewer\bin\Debug\AMXXVaultViewer.exe.config
+C:\Users\Trevor\Desktop\AMXXVaultViewer\bin\Debug\DarkUI.dll
+C:\Users\Trevor\Desktop\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.csproj.CopyComplete
+C:\Users\Trevor\Desktop\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.frmMain.resources
+C:\Users\Trevor\Desktop\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.formSearchBox.resources
