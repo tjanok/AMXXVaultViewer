@@ -14,32 +14,48 @@ namespace AMXXVaultViewer
         public ushort   VAULT_VERSION       = 0x0200;
         public uint     VAULT_MAGIC         = 0x6E564C54;
 
-        public struct Entry
-        {
-            public String key;
-            public DateTime timestamp;
-        }
-
-        Dictionary<Entry, String> keyValues = new Dictionary<Entry, String>();
+        VaultEntry selectedEntry;
+        Dictionary<VaultEntry, String> keyValues = new Dictionary<VaultEntry, String>();
 
         public int NumberOfEntries()
         {
             return keyValues.Count;
         }
 
-        public String GetValueFromKey( Entry key )
+        public void SetValue( String value )
         {
-            return keyValues[key];
+            keyValues[selectedEntry] = value;
+        }
+
+        public String GetValue()
+        {
+            return keyValues[selectedEntry];
+        }
+
+        public VaultEntry SelectedEntry
+        {
+            get { return selectedEntry; }
+            set { selectedEntry = value; }
         }
 
         public void PopulateListView( DarkListView lv )
         {
-            foreach( KeyValuePair<Entry,String> entry in keyValues )
+            foreach( KeyValuePair<VaultEntry,String> entry in keyValues )
             {
                 DarkListItem item = new DarkListItem( entry.Key.key );
                 item.Tag = entry.Key;
                 lv.Items.Add( item );
             }
+        }
+
+        public static DateTime ConvertFromUnixTime( UInt32 timestamp )
+        {
+            return new DateTime( 1970, 1, 1 ).ToLocalTime().AddSeconds( timestamp );
+        }
+
+        public static UInt32 ConvertFromDateTime( DateTime timestamp )
+        {
+            return (UInt32)( timestamp.ToLocalTime().Subtract( new DateTime( 1970, 1, 1 ) ) ).TotalSeconds;
         }
 
         public bool Open( String file )
@@ -77,9 +93,9 @@ namespace AMXXVaultViewer
                         char[] key = br.ReadChars( keyLen );
                         char[] value = br.ReadChars( valueLen );
 
-                        Entry entry;
+                        VaultEntry entry = new VaultEntry();
                         entry.key = new string( key );
-                        entry.timestamp = new DateTime( 1970, 1, 1 ).ToLocalTime().AddSeconds( temp );
+                        entry.timestamp = ConvertFromUnixTime( temp );
 
                         keyValues.Add( entry, new string( value ) );
                     }
