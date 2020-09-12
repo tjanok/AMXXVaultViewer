@@ -33,3 +33,16 @@ C:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.csproj.CoreCompileInput
 C:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.csproj.CopyComplete
 C:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.exe
 C:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.pdb
+D:\Dev\gamedev\AMXXVaultViewer\bin\Debug\AMXXVaultViewer.exe.config
+D:\Dev\gamedev\AMXXVaultViewer\bin\Debug\AMXXVaultViewer.exe
+D:\Dev\gamedev\AMXXVaultViewer\bin\Debug\AMXXVaultViewer.pdb
+D:\Dev\gamedev\AMXXVaultViewer\bin\Debug\DarkUI.dll
+D:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.csprojAssemblyReference.cache
+D:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.frmMain.resources
+D:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.SearchBox.resources
+D:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.Properties.Resources.resources
+D:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.csproj.GenerateResource.cache
+D:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.csproj.CoreCompileInputs.cache
+D:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.csproj.CopyComplete
+D:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.exe
+D:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.pdb

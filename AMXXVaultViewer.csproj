@@ -119,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="freethebirds.ico" />
+    <None Include="resources\sounds\bell1.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

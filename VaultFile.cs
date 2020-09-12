@@ -17,6 +17,10 @@ namespace AMXXVaultViewer
         VaultEntry selectedEntry;
         Dictionary<VaultEntry, String> keyValues = new Dictionary<VaultEntry, String>();
 
+        public void AddEntry( VaultEntry entry, String value )
+        {
+            keyValues.Add( entry, value );
+        }
         public int NumberOfEntries()
         {
             return keyValues.Count;
@@ -58,6 +62,29 @@ namespace AMXXVaultViewer
             return (UInt32)( timestamp.ToLocalTime().Subtract( new DateTime( 1970, 1, 1 ) ) ).TotalSeconds;
         }
 
+        public bool Save( String file )
+        {
+            // we're going to overwrite the vault file
+            // if an amxx plugin currently has one open, a .journal will be active.
+            // TODO:
+            // check for this journal file and notify user
+            if( File.Exists( file ) )
+                File.Delete( file );
+
+            BinaryWriter bw = new BinaryWriter( File.Open( file, FileMode.OpenOrCreate ) );
+
+            // Header
+            bw.Write( (uint)VAULT_MAGIC );
+            bw.Write( (ushort)VAULT_VERSION );
+            bw.Write( (uint)keyValues.Count );
+
+            bw.Flush();
+            bw.Close();
+
+            Console.WriteLine( "Done!" );
+            return true;
+        }
+
         public bool Open( String file )
         {
             try
@@ -95,7 +122,7 @@ namespace AMXXVaultViewer
 
                         VaultEntry entry = new VaultEntry();
                         entry.key = new string( key );
-                        entry.timestamp = ConvertFromUnixTime( temp );
+                        entry.timestamp = temp;
 
                         keyValues.Add( entry, new string( value ) );
                     }

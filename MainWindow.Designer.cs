@@ -31,20 +31,20 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnClose = new DarkUI.Controls.DarkButton();
+            this.btnAbout = new DarkUI.Controls.DarkButton();
             this.btnReload = new DarkUI.Controls.DarkButton();
             this.btnOpen = new DarkUI.Controls.DarkButton();
             this.pnlMainContainer = new DarkUI.Controls.DarkSectionPanel();
             this.grpKeys = new DarkUI.Controls.DarkGroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnFindKey = new DarkUI.Controls.DarkButton();
-            this.darkButton1 = new DarkUI.Controls.DarkButton();
+            this.btnAddEntry = new DarkUI.Controls.DarkButton();
             this.lvEntries = new DarkUI.Controls.DarkListView();
             this.lblEntryCount = new DarkUI.Controls.DarkLabel();
             this.grpEntryInfo = new DarkUI.Controls.DarkGroupBox();
             this.btnEntryTimeUpdate = new DarkUI.Controls.DarkButton();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.darkButton4 = new DarkUI.Controls.DarkButton();
+            this.btnEntrySave = new DarkUI.Controls.DarkButton();
             this.btnEntryExit = new DarkUI.Controls.DarkButton();
             this.darkButton2 = new DarkUI.Controls.DarkButton();
             this.btnEntryUpdate = new DarkUI.Controls.DarkButton();
@@ -69,38 +69,39 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Controls.Add(this.btnClose, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnAbout, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnReload, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnOpen, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(14, 475);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(5, 475);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(426, 35);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(435, 35);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
-            // btnClose
+            // btnAbout
             // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.Location = new System.Drawing.Point(287, 3);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Padding = new System.Windows.Forms.Padding(6);
-            this.btnClose.Size = new System.Drawing.Size(136, 29);
-            this.btnClose.TabIndex = 2;
-            this.btnClose.Text = "Close";
-            this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
+            this.btnAbout.Location = new System.Drawing.Point(290, 3);
+            this.btnAbout.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.btnAbout.Name = "btnAbout";
+            this.btnAbout.Padding = new System.Windows.Forms.Padding(6);
+            this.btnAbout.Size = new System.Drawing.Size(145, 29);
+            this.btnAbout.TabIndex = 2;
+            this.btnAbout.Text = "About";
+            this.btnAbout.Click += new System.EventHandler(this.BtnAbout_Click);
             // 
             // btnReload
             // 
             this.btnReload.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReload.Location = new System.Drawing.Point(145, 3);
+            this.btnReload.Location = new System.Drawing.Point(148, 3);
             this.btnReload.Name = "btnReload";
             this.btnReload.Padding = new System.Windows.Forms.Padding(6);
-            this.btnReload.Size = new System.Drawing.Size(136, 29);
+            this.btnReload.Size = new System.Drawing.Size(139, 29);
             this.btnReload.TabIndex = 1;
             this.btnReload.Text = "Reload";
             this.btnReload.Click += new System.EventHandler(this.BtnReload_Click);
@@ -110,10 +111,11 @@
             this.btnOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOpen.Location = new System.Drawing.Point(3, 3);
+            this.btnOpen.Location = new System.Drawing.Point(0, 3);
+            this.btnOpen.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Padding = new System.Windows.Forms.Padding(6);
-            this.btnOpen.Size = new System.Drawing.Size(136, 29);
+            this.btnOpen.Size = new System.Drawing.Size(145, 29);
             this.btnOpen.TabIndex = 0;
             this.btnOpen.Text = "Open";
             this.btnOpen.Click += new System.EventHandler(this.BtnOpen_Click);
@@ -149,7 +151,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.btnFindKey, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.darkButton1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnAddEntry, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 348);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
@@ -171,18 +173,19 @@
             this.btnFindKey.TabIndex = 13;
             this.btnFindKey.Click += new System.EventHandler(this.BtnFindKey_Click);
             // 
-            // darkButton1
+            // btnAddEntry
             // 
-            this.darkButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnAddEntry.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.darkButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.darkButton1.Image = ((System.Drawing.Image)(resources.GetObject("darkButton1.Image")));
-            this.darkButton1.Location = new System.Drawing.Point(3, 3);
-            this.darkButton1.Name = "darkButton1";
-            this.darkButton1.Padding = new System.Windows.Forms.Padding(5);
-            this.darkButton1.Size = new System.Drawing.Size(88, 37);
-            this.darkButton1.TabIndex = 12;
+            this.btnAddEntry.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnAddEntry.Image = ((System.Drawing.Image)(resources.GetObject("btnAddEntry.Image")));
+            this.btnAddEntry.Location = new System.Drawing.Point(3, 3);
+            this.btnAddEntry.Name = "btnAddEntry";
+            this.btnAddEntry.Padding = new System.Windows.Forms.Padding(5);
+            this.btnAddEntry.Size = new System.Drawing.Size(88, 37);
+            this.btnAddEntry.TabIndex = 12;
+            this.btnAddEntry.Click += new System.EventHandler(this.BtnAddEntry_Click);
             // 
             // lvEntries
             // 
@@ -245,11 +248,12 @@
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.darkButton4, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.btnEntrySave, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.btnEntryExit, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.darkButton2, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.btnEntryUpdate, 0, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(7, 159);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 4;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
@@ -260,27 +264,29 @@
             this.tableLayoutPanel3.Size = new System.Drawing.Size(204, 230);
             this.tableLayoutPanel3.TabIndex = 9;
             // 
-            // darkButton4
+            // btnEntrySave
             // 
-            this.darkButton4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnEntrySave.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.darkButton4.Location = new System.Drawing.Point(3, 117);
-            this.darkButton4.Name = "darkButton4";
-            this.darkButton4.Padding = new System.Windows.Forms.Padding(5);
-            this.darkButton4.Size = new System.Drawing.Size(198, 51);
-            this.darkButton4.TabIndex = 2;
-            this.darkButton4.Text = "Delete";
+            this.btnEntrySave.Location = new System.Drawing.Point(0, 119);
+            this.btnEntrySave.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.btnEntrySave.Name = "btnEntrySave";
+            this.btnEntrySave.Padding = new System.Windows.Forms.Padding(5);
+            this.btnEntrySave.Size = new System.Drawing.Size(204, 47);
+            this.btnEntrySave.TabIndex = 2;
+            this.btnEntrySave.Text = "Save";
             // 
             // btnEntryExit
             // 
             this.btnEntryExit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEntryExit.Location = new System.Drawing.Point(3, 174);
+            this.btnEntryExit.Location = new System.Drawing.Point(0, 176);
+            this.btnEntryExit.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.btnEntryExit.Name = "btnEntryExit";
             this.btnEntryExit.Padding = new System.Windows.Forms.Padding(5);
-            this.btnEntryExit.Size = new System.Drawing.Size(198, 53);
+            this.btnEntryExit.Size = new System.Drawing.Size(204, 49);
             this.btnEntryExit.TabIndex = 1;
             this.btnEntryExit.Text = "Exit";
             this.btnEntryExit.Click += new System.EventHandler(this.BtnEntryExit_Click);
@@ -290,10 +296,11 @@
             this.darkButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.darkButton2.Location = new System.Drawing.Point(3, 60);
+            this.darkButton2.Location = new System.Drawing.Point(0, 62);
+            this.darkButton2.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.darkButton2.Name = "darkButton2";
             this.darkButton2.Padding = new System.Windows.Forms.Padding(5);
-            this.darkButton2.Size = new System.Drawing.Size(198, 51);
+            this.darkButton2.Size = new System.Drawing.Size(204, 47);
             this.darkButton2.TabIndex = 0;
             this.darkButton2.Text = "Delete";
             this.darkButton2.Click += new System.EventHandler(this.DarkButton2_Click);
@@ -303,10 +310,11 @@
             this.btnEntryUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEntryUpdate.Location = new System.Drawing.Point(3, 3);
+            this.btnEntryUpdate.Location = new System.Drawing.Point(0, 5);
+            this.btnEntryUpdate.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.btnEntryUpdate.Name = "btnEntryUpdate";
             this.btnEntryUpdate.Padding = new System.Windows.Forms.Padding(5);
-            this.btnEntryUpdate.Size = new System.Drawing.Size(198, 51);
+            this.btnEntryUpdate.Size = new System.Drawing.Size(204, 47);
             this.btnEntryUpdate.TabIndex = 3;
             this.btnEntryUpdate.Text = "Update";
             this.btnEntryUpdate.Click += new System.EventHandler(this.BtnEntryUpdate_Click);
@@ -315,6 +323,7 @@
             // 
             this.txtTimestamp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(69)))), ((int)(((byte)(73)))), ((int)(((byte)(74)))));
             this.txtTimestamp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTimestamp.Enabled = false;
             this.txtTimestamp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.txtTimestamp.Location = new System.Drawing.Point(7, 130);
             this.txtTimestamp.Name = "txtTimestamp";
@@ -370,7 +379,8 @@
             // 
             // ttEntryTips
             // 
-            this.ttEntryTips.IsBalloon = true;
+            this.ttEntryTips.ShowAlways = true;
+            this.ttEntryTips.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             // 
             // frmMain
             // 
@@ -402,7 +412,7 @@
 
         #endregion
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private DarkUI.Controls.DarkButton btnClose;
+        private DarkUI.Controls.DarkButton btnAbout;
         private DarkUI.Controls.DarkButton btnReload;
         private DarkUI.Controls.DarkButton btnOpen;
         private DarkUI.Controls.DarkSectionPanel pnlMainContainer;
@@ -416,12 +426,12 @@
         private DarkUI.Controls.DarkTitle lblKey;
         private DarkUI.Controls.DarkLabel lblEntryCount;
         private DarkUI.Controls.DarkGroupBox grpKeys;
-        private DarkUI.Controls.DarkButton darkButton1;
+        private DarkUI.Controls.DarkButton btnAddEntry;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private DarkUI.Controls.DarkButton btnEntryExit;
         private DarkUI.Controls.DarkButton darkButton2;
-        private DarkUI.Controls.DarkButton darkButton4;
+        private DarkUI.Controls.DarkButton btnEntrySave;
         private DarkUI.Controls.DarkButton btnEntryUpdate;
         private DarkUI.Controls.DarkButton btnFindKey;
         private DarkUI.Controls.DarkButton btnEntryTimeUpdate;

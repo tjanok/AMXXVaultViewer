@@ -8,6 +8,6 @@ namespace AMXXVaultViewer
     class VaultEntry
     {
         public String key;
-        public DateTime timestamp;
+        public UInt32 timestamp; // Unix epoch
     }
 }

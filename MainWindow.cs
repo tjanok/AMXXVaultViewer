@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+using System.Media;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using System.Reflection;
 using DarkUI.Forms;
 using DarkUI.Controls;
 
@@ -17,6 +15,9 @@ namespace AMXXVaultViewer
         private String activeFileName;
         DarkListItem selectedListItem;
         private VaultFile vaultFile = new VaultFile();
+
+        // UI Sounds
+        SoundPlayer sndSuccess = new SoundPlayer( Properties.Resources.bell1 );
 
         public frmMain()
         {
@@ -64,21 +65,27 @@ namespace AMXXVaultViewer
             openFileDialog.FileOk += ( ofdSender, ofdE ) =>
             {
                 activeFileName = openFileDialog.FileName;
-                OpenVaultFile( openFileDialog.FileName );
+                //OpenVaultFile( openFileDialog.FileName );
+                vaultFile.Save( openFileDialog.FileName );
             };
             openFileDialog.Multiselect = false;
             openFileDialog.ShowDialog();
+        }
+        private void BtnAbout_Click( object sender, EventArgs e )
+        {
+            DarkMessageBox.ShowInformation( $"{System.AppDomain.CurrentDomain.FriendlyName}\nwww.github.com/tjanok", "About" );
         }
 
         private void BtnEntryUpdate_Click( object sender, EventArgs e )
         {
             // update the selected enteries details
             vaultFile.SelectedEntry.key = txtKey.Text;
-            vaultFile.SelectedEntry.timestamp = Convert.ToDateTime( txtTimestamp.Text );
             vaultFile.SetValue( txtValue.Text );
 
             // update listview with modified key
             selectedListItem.Text = txtKey.Text;
+
+            sndSuccess.Play();
         }
         private void BtnEntryExit_Click( object sender, EventArgs e )
         {
@@ -86,11 +93,28 @@ namespace AMXXVaultViewer
             // Ask to save changes??
             Application.Exit();
         }
+        private void BtnAddEntry_Click( object sender, EventArgs e )
+        {
+            VaultEntry vaultEntry = new VaultEntry();
+            int indexNum = GetNextFreeIndex();
+
+            vaultEntry.key = $"new_key-{indexNum}";
+            vaultEntry.timestamp = 0;
+
+            vaultFile.AddEntry( vaultEntry, "" );
+
+            DarkListItem item = new DarkListItem( vaultEntry.key );
+            item.Tag = vaultEntry;
+
+            lvEntries.Items.Add( item );
+            lvEntries.SelectItem( lvEntries.Items.Count - 1 );
+
+        }
         #endregion
 
         private void ToggleButtons( bool makeVisible = false )
         {
-            btnClose.Visible            = makeVisible;
+            btnAbout.Visible            = makeVisible;
             btnReload.Visible           = makeVisible;
             grpEntryInfo.Visible        = makeVisible;
             grpKeys.Visible             = makeVisible;
@@ -106,6 +130,11 @@ namespace AMXXVaultViewer
         {
             if( lvEntries.Items.Count > 0 )
                 lvEntries.SelectItem( 0 );
+        }
+
+        private int GetNextFreeIndex()
+        {
+            return lvEntries.Items.Count + 1;
         }
         private void LblEntryCount_Click( object sender, EventArgs e )
         {
@@ -137,21 +166,12 @@ namespace AMXXVaultViewer
                 this.txtKey.Text = itemEntry.key;
                 this.txtValue.Text = vaultFile.GetValue();
 
-                DateTime timestamp = itemEntry.timestamp;
-                this.txtTimestamp.Text = timestamp.ToString();
-
-                Console.WriteLine( VaultFile.ConvertFromDateTime( timestamp ) );
+                if( itemEntry.timestamp != 0 )
+                    txtTimestamp.Text = VaultFile.ConvertFromUnixTime( itemEntry.timestamp ).ToString();
+                else
+                    txtTimestamp.Text = "Permanent";
             }
         }
-
-        private void BtnClose_Click( object sender, EventArgs e )
-        {
-            pnlMainContainer.SectionHeader = "No File Loaded";
-            ToggleButtons();
-            vaultFile = new VaultFile();
-            lvEntries.Items.Clear();
-        }
-
         private void GrpEntryInfo_Enter( object sender, EventArgs e )
         {
 
@@ -185,6 +205,5 @@ namespace AMXXVaultViewer
         private void BtnEntryTimeUpdate_Click( object sender, EventArgs e )
         {
         }
-
     }
 }
