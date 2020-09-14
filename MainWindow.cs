@@ -126,7 +126,7 @@ namespace AMXXVaultViewer
         private void BtnEntryTimeUpdate_Click( object sender, EventArgs e )
         {
             vaultFile.SelectedEntry.timestamp = VaultFile.ConvertFromDateTime( DateTime.Now );
-            txtTimestamp.Text = vaultFile.SelectedEntry.timestamp.ToString();
+            UpdateTimestamp( vaultFile.SelectedEntry );
         }
 
         private void BtnEntrySave_Click( object sender, EventArgs e )
@@ -239,7 +239,24 @@ namespace AMXXVaultViewer
 
         private int GetNextFreeIndex()
         {
-            return lvEntries.Items.Count + 1;
+            int index = 0;
+
+            for( int i = 0; i < lvEntries.Items.Count; i++ )
+            {
+                if( lvEntries.Items[i].Text.Contains( "-" ) )
+                {
+                    int found = lvEntries.Items[i].Text.IndexOf( '-' );
+                    if( found > 0 )
+                    {
+                        int newIndex = Convert.ToInt16( lvEntries.Items[i].Text.Substring( found + 1 ) );
+                        if( newIndex > index )
+                            index = newIndex;
+                    }
+
+                }
+            }
+
+            return index + 1;
         }
         private void ToggleButtons( bool makeVisible = false )
         {
