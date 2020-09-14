@@ -48,7 +48,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>freethebirds.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DarkUI">
@@ -127,7 +128,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="freethebirds.ico" />
     <None Include="resources\sounds\button2.wav" />
     <None Include="resources\sounds\bell1.wav" />
   </ItemGroup>

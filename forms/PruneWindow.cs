@@ -19,17 +19,31 @@ namespace AMXXVaultViewer
 
         private void PruneWindow_Load( object sender, EventArgs e )
         {
-
+            this.CenterToScreen();
         }
 
-        private void DarkTitle1_Click( object sender, EventArgs e )
+        private void BtnQuit_Click( object sender, EventArgs e )
         {
-
+            this.Close();
         }
 
-        private void DarkSectionPanel2_Paint( object sender, PaintEventArgs e )
+        private void PruneWindow_KeyDown( object sender, KeyEventArgs e )
         {
+            if( e.KeyCode == Keys.Escape )
+                this.Close();
+        }
 
+        private void BtnPrune_Click( object sender, EventArgs e )
+        {
+            if( DarkMessageBox.ShowWarning( "Are you sure you wish to prune the selected date range?", "Continue", DarkDialogButton.YesNo ) == DialogResult.Yes )
+            {
+                MainWindow.mainWindow.PruneEntries(
+                    Convert.ToDateTime( monthStart.SelectionStart.ToShortDateString() ),
+                    Convert.ToDateTime( monthEnd.SelectionStart.ToShortDateString() )
+                );
+
+                this.Close();
+            }
         }
     }
 }

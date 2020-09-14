@@ -1,6 +1,6 @@
 ﻿namespace AMXXVaultViewer
 {
-    partial class frmMain
+    partial class MainWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.btnAbout = new DarkUI.Controls.DarkButton();
             this.btnReload = new DarkUI.Controls.DarkButton();
@@ -37,6 +37,7 @@
             this.pnlMainContainer = new DarkUI.Controls.DarkSectionPanel();
             this.grpKeys = new DarkUI.Controls.DarkGroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnPruneEntries = new DarkUI.Controls.DarkButton();
             this.btnFindKey = new DarkUI.Controls.DarkButton();
             this.btnAddEntry = new DarkUI.Controls.DarkButton();
             this.lvEntries = new DarkUI.Controls.DarkListView();
@@ -147,9 +148,11 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.Controls.Add(this.btnPruneEntries, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnFindKey, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnAddEntry, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 348);
@@ -159,6 +162,21 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(189, 43);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
+            // btnPruneEntries
+            // 
+            this.btnPruneEntries.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPruneEntries.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnPruneEntries.Image = ((System.Drawing.Image)(resources.GetObject("btnPruneEntries.Image")));
+            this.btnPruneEntries.Location = new System.Drawing.Point(66, 3);
+            this.btnPruneEntries.Name = "btnPruneEntries";
+            this.btnPruneEntries.Padding = new System.Windows.Forms.Padding(5);
+            this.btnPruneEntries.Size = new System.Drawing.Size(57, 37);
+            this.btnPruneEntries.TabIndex = 14;
+            this.ttEntryTips.SetToolTip(this.btnPruneEntries, "Prune all entries from a date range");
+            this.btnPruneEntries.Click += new System.EventHandler(this.BtnPruneEntries_Click);
+            // 
             // btnFindKey
             // 
             this.btnFindKey.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -166,11 +184,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFindKey.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnFindKey.Image = ((System.Drawing.Image)(resources.GetObject("btnFindKey.Image")));
-            this.btnFindKey.Location = new System.Drawing.Point(97, 3);
+            this.btnFindKey.Location = new System.Drawing.Point(129, 3);
             this.btnFindKey.Name = "btnFindKey";
             this.btnFindKey.Padding = new System.Windows.Forms.Padding(5);
-            this.btnFindKey.Size = new System.Drawing.Size(89, 37);
+            this.btnFindKey.Size = new System.Drawing.Size(57, 37);
             this.btnFindKey.TabIndex = 13;
+            this.ttEntryTips.SetToolTip(this.btnFindKey, "Search all keys for a string");
             this.btnFindKey.Click += new System.EventHandler(this.BtnFindKey_Click);
             // 
             // btnAddEntry
@@ -183,8 +202,9 @@
             this.btnAddEntry.Location = new System.Drawing.Point(3, 3);
             this.btnAddEntry.Name = "btnAddEntry";
             this.btnAddEntry.Padding = new System.Windows.Forms.Padding(5);
-            this.btnAddEntry.Size = new System.Drawing.Size(88, 37);
+            this.btnAddEntry.Size = new System.Drawing.Size(57, 37);
             this.btnAddEntry.TabIndex = 12;
+            this.ttEntryTips.SetToolTip(this.btnAddEntry, "Add a new vault entry");
             this.btnAddEntry.Click += new System.EventHandler(this.BtnAddEntry_Click);
             // 
             // lvEntries
@@ -274,6 +294,7 @@
             this.btnEntrySave.Size = new System.Drawing.Size(204, 47);
             this.btnEntrySave.TabIndex = 2;
             this.btnEntrySave.Text = "Save";
+            this.ttEntryTips.SetToolTip(this.btnEntrySave, "Save all changes to this vault");
             this.btnEntrySave.Click += new System.EventHandler(this.BtnEntrySave_Click);
             // 
             // btnEntryExit
@@ -302,6 +323,7 @@
             this.btnEntryDelete.Size = new System.Drawing.Size(204, 47);
             this.btnEntryDelete.TabIndex = 0;
             this.btnEntryDelete.Text = "Delete";
+            this.ttEntryTips.SetToolTip(this.btnEntryDelete, "Delete this entry");
             this.btnEntryDelete.Click += new System.EventHandler(this.BtnEntryDelete_Click);
             // 
             // btnEntryUpdate
@@ -316,6 +338,7 @@
             this.btnEntryUpdate.Size = new System.Drawing.Size(204, 47);
             this.btnEntryUpdate.TabIndex = 3;
             this.btnEntryUpdate.Text = "Update";
+            this.ttEntryTips.SetToolTip(this.btnEntryUpdate, "Update this entry");
             this.btnEntryUpdate.Click += new System.EventHandler(this.BtnEntryUpdate_Click);
             // 
             // txtTimestamp
@@ -381,7 +404,7 @@
             this.ttEntryTips.ShowAlways = true;
             this.ttEntryTips.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             // 
-            // frmMain
+            // MainWindow
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -394,7 +417,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmMain";
+            this.Name = "MainWindow";
             this.Padding = new System.Windows.Forms.Padding(1);
             this.Text = "AMXX nVault Viewer";
             this.Load += new System.EventHandler(this.FrmMain_Load);
@@ -435,6 +458,7 @@
         private DarkUI.Controls.DarkButton btnFindKey;
         private DarkUI.Controls.DarkButton btnEntryTimeUpdate;
         private System.Windows.Forms.ToolTip ttEntryTips;
+        private DarkUI.Controls.DarkButton btnPruneEntries;
     }
 }
 

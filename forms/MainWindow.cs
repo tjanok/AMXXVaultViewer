@@ -11,7 +11,7 @@ using System.Drawing;
 
 namespace AMXXVaultViewer
 {
-    public partial class frmMain : DarkForm
+    public partial class MainWindow : DarkForm
     {
         #region PRIVATE VARS
         String selectedFileName;
@@ -23,8 +23,11 @@ namespace AMXXVaultViewer
         SoundPlayer sndFailed = new SoundPlayer( Properties.Resources.button2 );
         #endregion
 
-        public frmMain()
+        public static MainWindow mainWindow;
+
+        public MainWindow()
         {
+            mainWindow = this;
             InitializeComponent();
         }
 
@@ -33,6 +36,19 @@ namespace AMXXVaultViewer
             // Setup default visiblity on controls
             ToggleButtons();
         }
+
+        #region PUBLIC METHODS
+        public void PruneEntries( DateTime start, DateTime end )
+        {
+            // make sure we are selecting a positive date range
+            // or if we are pruning todays date
+            if( end.Subtract( start ).TotalSeconds > 1 || ( start.Date == DateTime.Now.Date && end.Date == DateTime.Now.Date ) )
+            {
+                int pruned = vaultFile.PruneEntries( start, end );
+                DarkMessageBox.ShowInformation( $"Pruned {pruned} total entieries from the vault", "Pruning" );
+            }
+        }
+        #endregion
 
         #region BUTTON CLICKS
         private void BtnOpen_Click( object sender, EventArgs e )
@@ -267,5 +283,11 @@ namespace AMXXVaultViewer
             lblEntryCount.Visible = makeVisible;
         }
         #endregion
+
+        private void BtnPruneEntries_Click( object sender, EventArgs e )
+        {
+            PruneWindow pruneWindow = new PruneWindow();
+            pruneWindow.Show();
+        }
     }
 }
