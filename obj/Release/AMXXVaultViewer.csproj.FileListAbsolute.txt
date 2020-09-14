@@ -10,3 +10,5 @@ D:\Dev\gamedev\AMXXVaultViewer\obj\Release\AMXXVaultViewer.csproj.CoreCompileInp
 D:\Dev\gamedev\AMXXVaultViewer\obj\Release\AMXXVaultViewer.csproj.CopyComplete
 D:\Dev\gamedev\AMXXVaultViewer\obj\Release\AMXXVaultViewer.exe
 D:\Dev\gamedev\AMXXVaultViewer\obj\Release\AMXXVaultViewer.pdb
+D:\Dev\gamedev\AMXXVaultViewer\obj\Release\AMXXVaultViewer.csprojAssemblyReference.cache
+D:\Dev\gamedev\AMXXVaultViewer\obj\Release\AMXXVaultViewer.PruneWindow.resources

@@ -72,6 +72,12 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="PruneWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PruneWindow.Designer.cs">
+      <DependentUpon>PruneWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="SearchBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,9 @@
     <Compile Include="VaultFileHeader.cs" />
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PruneWindow.resx">
+      <DependentUpon>PruneWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SearchBox.resx">
       <DependentUpon>SearchBox.cs</DependentUpon>
@@ -119,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="freethebirds.ico" />
+    <None Include="resources\sounds\button2.wav" />
     <None Include="resources\sounds\bell1.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

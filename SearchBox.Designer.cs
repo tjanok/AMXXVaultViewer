@@ -54,7 +54,7 @@
             this.darkTitle1.TabIndex = 1;
             this.darkTitle1.Text = "Search:";
             // 
-            // formSearchBox
+            // SearchBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -64,10 +64,9 @@
             this.Controls.Add(this.tboxSearchString);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "formSearchBox";
+            this.Name = "SearchBox";
             this.Padding = new System.Windows.Forms.Padding(5);
             this.Text = "formSearchBox";
-            this.Load += new System.EventHandler(this.FormSearchBox_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

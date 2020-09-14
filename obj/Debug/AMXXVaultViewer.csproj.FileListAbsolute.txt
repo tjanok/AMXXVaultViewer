@@ -46,3 +46,4 @@ D:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.csproj.CoreCompileInput
 D:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.csproj.CopyComplete
 D:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.exe
 D:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.pdb
+D:\Dev\gamedev\AMXXVaultViewer\obj\Debug\AMXXVaultViewer.PruneWindow.resources

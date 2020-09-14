@@ -46,7 +46,7 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.btnEntrySave = new DarkUI.Controls.DarkButton();
             this.btnEntryExit = new DarkUI.Controls.DarkButton();
-            this.darkButton2 = new DarkUI.Controls.DarkButton();
+            this.btnEntryDelete = new DarkUI.Controls.DarkButton();
             this.btnEntryUpdate = new DarkUI.Controls.DarkButton();
             this.txtTimestamp = new DarkUI.Controls.DarkTextBox();
             this.darkTitle2 = new DarkUI.Controls.DarkTitle();
@@ -208,7 +208,6 @@
             this.lblEntryCount.TabIndex = 10;
             this.lblEntryCount.Text = "Total: 1337";
             this.lblEntryCount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblEntryCount.Click += new System.EventHandler(this.LblEntryCount_Click);
             // 
             // grpEntryInfo
             // 
@@ -227,7 +226,6 @@
             this.grpEntryInfo.TabIndex = 3;
             this.grpEntryInfo.TabStop = false;
             this.grpEntryInfo.Text = "Entry";
-            this.grpEntryInfo.Enter += new System.EventHandler(this.GrpEntryInfo_Enter);
             // 
             // btnEntryTimeUpdate
             // 
@@ -250,7 +248,7 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.btnEntrySave, 0, 2);
             this.tableLayoutPanel3.Controls.Add(this.btnEntryExit, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.darkButton2, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.btnEntryDelete, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.btnEntryUpdate, 0, 0);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(7, 159);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
@@ -276,6 +274,7 @@
             this.btnEntrySave.Size = new System.Drawing.Size(204, 47);
             this.btnEntrySave.TabIndex = 2;
             this.btnEntrySave.Text = "Save";
+            this.btnEntrySave.Click += new System.EventHandler(this.BtnEntrySave_Click);
             // 
             // btnEntryExit
             // 
@@ -291,19 +290,19 @@
             this.btnEntryExit.Text = "Exit";
             this.btnEntryExit.Click += new System.EventHandler(this.BtnEntryExit_Click);
             // 
-            // darkButton2
+            // btnEntryDelete
             // 
-            this.darkButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.btnEntryDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.darkButton2.Location = new System.Drawing.Point(0, 62);
-            this.darkButton2.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
-            this.darkButton2.Name = "darkButton2";
-            this.darkButton2.Padding = new System.Windows.Forms.Padding(5);
-            this.darkButton2.Size = new System.Drawing.Size(204, 47);
-            this.darkButton2.TabIndex = 0;
-            this.darkButton2.Text = "Delete";
-            this.darkButton2.Click += new System.EventHandler(this.DarkButton2_Click);
+            this.btnEntryDelete.Location = new System.Drawing.Point(0, 62);
+            this.btnEntryDelete.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.btnEntryDelete.Name = "btnEntryDelete";
+            this.btnEntryDelete.Padding = new System.Windows.Forms.Padding(5);
+            this.btnEntryDelete.Size = new System.Drawing.Size(204, 47);
+            this.btnEntryDelete.TabIndex = 0;
+            this.btnEntryDelete.Text = "Delete";
+            this.btnEntryDelete.Click += new System.EventHandler(this.BtnEntryDelete_Click);
             // 
             // btnEntryUpdate
             // 
@@ -430,7 +429,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private DarkUI.Controls.DarkButton btnEntryExit;
-        private DarkUI.Controls.DarkButton darkButton2;
+        private DarkUI.Controls.DarkButton btnEntryDelete;
         private DarkUI.Controls.DarkButton btnEntrySave;
         private DarkUI.Controls.DarkButton btnEntryUpdate;
         private DarkUI.Controls.DarkButton btnFindKey;

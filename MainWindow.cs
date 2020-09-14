@@ -4,20 +4,24 @@ using System.Media;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using System.Reflection;
+using System.Linq;
 using DarkUI.Forms;
 using DarkUI.Controls;
+using System.Drawing;
 
 namespace AMXXVaultViewer
 {
     public partial class frmMain : DarkForm
     {
-        private String activeFileName;
+        #region PRIVATE VARS
+        String selectedFileName;
         DarkListItem selectedListItem;
-        private VaultFile vaultFile = new VaultFile();
+        VaultFile vaultFile;
 
         // UI Sounds
         SoundPlayer sndSuccess = new SoundPlayer( Properties.Resources.bell1 );
+        SoundPlayer sndFailed = new SoundPlayer( Properties.Resources.button2 );
+        #endregion
 
         public frmMain()
         {
@@ -28,29 +32,6 @@ namespace AMXXVaultViewer
         {
             // Setup default visiblity on controls
             ToggleButtons();
-        }
-
-        private void OpenVaultFile( String fileName )
-        {
-            if( File.Exists( fileName ) )
-            {
-                if( !vaultFile.Open( fileName ) )
-                {
-                    DarkMessageBox.ShowError( "Invalid nVault file opened\nMake sure the vault file is not currently opened on a running server.", "Error" );
-                    return;
-                }
-
-                // Update UI
-                ToggleButtons( true );
-
-                pnlMainContainer.SectionHeader = Path.GetFileName( activeFileName );
-                lblEntryCount.Text = "Total Entries: " + vaultFile.NumberOfEntries();
-
-                // Populate listview
-                lvEntries.Items.Clear();
-                vaultFile.PopulateListView( lvEntries );
-                SelectFirstKey();
-            }
         }
 
         #region BUTTON CLICKS
@@ -64,9 +45,8 @@ namespace AMXXVaultViewer
             openFileDialog.Filter = "nVault File|*.vault";
             openFileDialog.FileOk += ( ofdSender, ofdE ) =>
             {
-                activeFileName = openFileDialog.FileName;
-                //OpenVaultFile( openFileDialog.FileName );
-                vaultFile.Save( openFileDialog.FileName );
+                selectedFileName = openFileDialog.FileName;
+                OpenVaultFile( openFileDialog.FileName );
             };
             openFileDialog.Multiselect = false;
             openFileDialog.ShowDialog();
@@ -78,6 +58,11 @@ namespace AMXXVaultViewer
 
         private void BtnEntryUpdate_Click( object sender, EventArgs e )
         {
+            if( !ValidateEntryInfo() )
+            {
+                sndFailed.Play();
+                return;
+            }
             // update the selected enteries details
             vaultFile.SelectedEntry.key = txtKey.Text;
             vaultFile.SetValue( txtValue.Text );
@@ -85,6 +70,7 @@ namespace AMXXVaultViewer
             // update listview with modified key
             selectedListItem.Text = txtKey.Text;
 
+            // fiddle sticks
             sndSuccess.Play();
         }
         private void BtnEntryExit_Click( object sender, EventArgs e )
@@ -108,37 +94,6 @@ namespace AMXXVaultViewer
 
             lvEntries.Items.Add( item );
             lvEntries.SelectItem( lvEntries.Items.Count - 1 );
-
-        }
-        #endregion
-
-        private void ToggleButtons( bool makeVisible = false )
-        {
-            btnAbout.Visible            = makeVisible;
-            btnReload.Visible           = makeVisible;
-            grpEntryInfo.Visible        = makeVisible;
-            grpKeys.Visible             = makeVisible;
-            lblEntryCount.Visible       = makeVisible;
-        }
-
-        private bool ValidateEntryInfo()
-        {
-            return true;
-        }
-
-        private void SelectFirstKey()
-        {
-            if( lvEntries.Items.Count > 0 )
-                lvEntries.SelectItem( 0 );
-        }
-
-        private int GetNextFreeIndex()
-        {
-            return lvEntries.Items.Count + 1;
-        }
-        private void LblEntryCount_Click( object sender, EventArgs e )
-        {
-
         }
 
         private void BtnReload_Click( object sender, EventArgs e )
@@ -148,9 +103,58 @@ namespace AMXXVaultViewer
             vaultFile = new VaultFile();
             lvEntries.Items.Clear();
 
-            OpenVaultFile( activeFileName );
+            OpenVaultFile( selectedFileName );
+        }
+        private void BtnFindKey_Click( object sender, EventArgs e )
+        {
+            StringBuilder sb = new StringBuilder();
+            SearchBox searchBox = new SearchBox( sb );
+
+            searchBox.StartPosition = FormStartPosition.Manual;
+            searchBox.SetDesktopLocation( Cursor.Position.X, Cursor.Position.Y );
+            searchBox.ShowDialog();
+
+            foreach( DarkListItem item in this.lvEntries.Items )
+            {
+                if( item.Text == sb.ToString() )
+                {
+                    this.lvEntries.SelectItem( this.lvEntries.Items.IndexOf( item ) );
+                }
+            }
         }
 
+        private void BtnEntryTimeUpdate_Click( object sender, EventArgs e )
+        {
+            vaultFile.SelectedEntry.timestamp = VaultFile.ConvertFromDateTime( DateTime.Now );
+            txtTimestamp.Text = vaultFile.SelectedEntry.timestamp.ToString();
+        }
+
+        private void BtnEntrySave_Click( object sender, EventArgs e )
+        {
+            if( selectedFileName.Length == 0 )
+                return;
+
+            if( vaultFile.Save( selectedFileName ) )
+                sndSuccess.Play();
+            else
+            {
+                sndFailed.Play();
+                DarkMessageBox.ShowError( "Failed to save vault file", "Error" );
+            }
+        }
+        private void BtnEntryDelete_Click( object sender, EventArgs e )
+        {
+            if( vaultFile.SelectedEntry != null )
+            {
+                if( DarkMessageBox.ShowInformation( "Are you sure you wish to delete this entry?", "Continue", DarkDialogButton.YesNo ) == DialogResult.Yes )
+                {
+                    vaultFile.DeleteEntry( vaultFile.SelectedEntry );
+                    lvEntries.Items.Remove( selectedListItem );
+                    SelectFirstKey();
+                }
+            }
+        }
+        #endregion
         private void LvEntries_SelectedIndicesChanged( object sender, EventArgs e )
         {
             if( lvEntries.Items.Count > 0 )
@@ -166,44 +170,85 @@ namespace AMXXVaultViewer
                 this.txtKey.Text = itemEntry.key;
                 this.txtValue.Text = vaultFile.GetValue();
 
-                if( itemEntry.timestamp != 0 )
-                    txtTimestamp.Text = VaultFile.ConvertFromUnixTime( itemEntry.timestamp ).ToString();
-                else
-                    txtTimestamp.Text = "Permanent";
+                UpdateTimestamp( itemEntry );
             }
         }
-        private void GrpEntryInfo_Enter( object sender, EventArgs e )
+
+        #region PRIVATE FUNCTIONS
+        private void OpenVaultFile( String fileName )
         {
-
-        }
-
-        private void DarkButton2_Click( object sender, EventArgs e )
-        {
-
-        }
-
-        private void BtnFindKey_Click( object sender, EventArgs e )
-        {
-            StringBuilder sb = new StringBuilder();
-            SearchBox searchBox = new SearchBox( sb );
-
-            searchBox.StartPosition = FormStartPosition.Manual;
-            searchBox.SetDesktopLocation( Cursor.Position.X, Cursor.Position.Y );
-            searchBox.ShowDialog();
-
-            Console.WriteLine( "S: " + sb.ToString() );
-
-            foreach( DarkListItem item in this.lvEntries.Items )
+            if( File.Exists( fileName ) )
             {
-                if( item.Text == sb.ToString() )
+                vaultFile = new VaultFile();
+
+                if( !vaultFile.Open( fileName ) )
                 {
-                    this.lvEntries.SelectItem( this.lvEntries.Items.IndexOf( item ) );
+                    DarkMessageBox.ShowError( "Invalid nVault file opened\nMake sure the vault file is not currently opened on a running server.", "Error" );
+                    return;
                 }
+
+                // Update UI
+                ToggleButtons( true );
+                lvEntries.Items.Clear();
+
+                pnlMainContainer.SectionHeader = Path.GetFileName( selectedFileName );
+                lblEntryCount.Text = "Total Entries: " + vaultFile.NumberOfEntries();
+
+                // Populate listview
+                vaultFile.PopulateListView( lvEntries );
+                SelectFirstKey();
             }
         }
 
-        private void BtnEntryTimeUpdate_Click( object sender, EventArgs e )
+        private void UpdateTimestamp( VaultEntry itemEntry )
         {
+            if( itemEntry.timestamp != 0 )
+                txtTimestamp.Text = $"{itemEntry.timestamp.ToString()} ({VaultFile.ConvertFromUnixTime( itemEntry.timestamp ).ToString( "MMM dd, yyyy" )})";
+            else
+                txtTimestamp.Text = "Permanent";
         }
+        private bool ValidateEntryInfo()
+        {
+            if( vaultFile.SelectedEntry == null )
+                return false;
+
+            if( RemoveWhiteSpace( txtKey.Text ).Length == 0 )
+            {
+                txtKey.Focus();
+                return false;
+            }
+
+            if( RemoveWhiteSpace( txtValue.Text ).Length == 0 )
+            {
+                txtValue.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        private String RemoveWhiteSpace( String value )
+        {
+            return new String( value.ToCharArray().Where( c => !Char.IsWhiteSpace( c ) ).ToArray() );
+        }
+        private void SelectFirstKey()
+        {
+            if( lvEntries.Items.Count > 0 )
+                lvEntries.SelectItem( 0 );
+        }
+
+        private int GetNextFreeIndex()
+        {
+            return lvEntries.Items.Count + 1;
+        }
+        private void ToggleButtons( bool makeVisible = false )
+        {
+            btnAbout.Visible = makeVisible;
+            btnReload.Visible = makeVisible;
+            grpEntryInfo.Visible = makeVisible;
+            grpKeys.Visible = makeVisible;
+            lblEntryCount.Visible = makeVisible;
+        }
+        #endregion
     }
 }

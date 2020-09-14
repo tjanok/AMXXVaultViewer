@@ -19,17 +19,16 @@ namespace AMXXVaultViewer
             InitializeComponent();
         }
 
-        private void FormSearchBox_Load( object sender, EventArgs e )
-        {
-
-        }
-
         private void TboxSearchString_KeyDown( object sender, KeyEventArgs e )
         {
             if( e.KeyCode == Keys.Enter )
             {
                 searchString.Append( this.tboxSearchString.Text );
-                this.Close();
+                Close();
+            }
+            else if( e.KeyCode == Keys.Escape )
+            {
+                Close();
             }
         }
     }

@@ -21,6 +21,10 @@ namespace AMXXVaultViewer
         {
             keyValues.Add( entry, value );
         }
+        public void DeleteEntry( VaultEntry entry )
+        {
+            keyValues.Remove( entry );
+        }
         public int NumberOfEntries()
         {
             return keyValues.Count;
@@ -54,7 +58,7 @@ namespace AMXXVaultViewer
 
         public static DateTime ConvertFromUnixTime( UInt32 timestamp )
         {
-            return new DateTime( 1970, 1, 1 ).ToLocalTime().AddSeconds( timestamp );
+            return new DateTime( 1970, 1, 1 ).AddSeconds( timestamp );
         }
 
         public static UInt32 ConvertFromDateTime( DateTime timestamp )
@@ -78,6 +82,36 @@ namespace AMXXVaultViewer
             bw.Write( (ushort)VAULT_VERSION );
             bw.Write( (uint)keyValues.Count );
 
+            UInt32 temp;
+            Byte keyLen;
+            UInt16 valueLen;
+
+            foreach( KeyValuePair<VaultEntry, String> entry in keyValues )
+            {
+                bw.Write( (UInt32)entry.Key.timestamp );
+                bw.Write( (byte)entry.Key.key.Length );
+                bw.Write( (UInt16)entry.Value.Length );
+
+                bw.Write( (char[])entry.Key.key.ToCharArray() );
+                bw.Write( (char[])entry.Value.ToCharArray() );
+                /*
+                //timestamp
+                //C++ time_t
+                temp = br.ReadUInt32();
+                keyLen = br.ReadByte();
+                valueLen = br.ReadUInt16();
+
+                char[] key = br.ReadChars( keyLen );
+                char[] value = br.ReadChars( valueLen );
+
+                VaultEntry entry = new VaultEntry();
+                entry.key = new string( key );
+                entry.timestamp = temp;
+
+                keyValues.Add( entry, new string( value ) );
+                */
+            }
+
             bw.Flush();
             bw.Close();
 
@@ -89,6 +123,10 @@ namespace AMXXVaultViewer
         {
             try
             {
+                // make a backup...
+                if( File.Exists( file ) )
+                    File.Copy( file, file + ".bak", true );
+
                 BinaryReader br = new BinaryReader( File.Open( file, FileMode.Open ) );
                 VaultFileHeader header;
 
