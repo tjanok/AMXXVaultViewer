@@ -16,7 +16,10 @@ Features
 Libs
 ----
 Uses the awesome DarkUI</br>
-https://github.com/RobinPerris/DarkUI
+https://github.com/RobinPerris/DarkUI</br>
+</br>
+SilkIcons</br>
+https://github.com/legacy-icons/famfamfam-silk
  
 License
 -------
