@@ -6,6 +6,10 @@ nVault is a module for the server-side addon https://github.com/alliedmodders/am
  <img src="resources/screenshot.png?raw=true"/>
 </p>
 
+Download
+--------
+View the releases page, and download the latest release zip.
+https://github.com/tjanok/AMXXVaultViewer/releases
 
 Features
 --------
