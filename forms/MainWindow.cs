@@ -18,6 +18,10 @@ namespace AMXXVaultViewer
         DarkListItem selectedListItem;
         VaultFile vaultFile;
 
+        // Searching
+        DarkListItem searchListItem;
+        String previousSearch;
+
         // UI Sounds
         SoundPlayer sndSuccess = new SoundPlayer( Properties.Resources.bell1 );
         SoundPlayer sndFailed = new SoundPlayer( Properties.Resources.button2 );
@@ -69,9 +73,13 @@ namespace AMXXVaultViewer
         }
         private void BtnAbout_Click( object sender, EventArgs e )
         {
-            DarkMessageBox.ShowInformation( $"{System.AppDomain.CurrentDomain.FriendlyName}\nwww.github.com/tjanok", "About" );
+            DarkMessageBox.ShowInformation( $"{System.AppDomain.CurrentDomain.FriendlyName}\nVersion: {Properties.Settings.Default.Version}\nwww.github.com/tjanok", "About" );
         }
-
+        private void BtnPruneEntries_Click( object sender, EventArgs e )
+        {
+            PruneWindow pruneWindow = new PruneWindow();
+            pruneWindow.Show();
+        }
         private void BtnEntryUpdate_Click( object sender, EventArgs e )
         {
             if( !ValidateEntryInfo() )
@@ -121,22 +129,11 @@ namespace AMXXVaultViewer
 
             OpenVaultFile( selectedFileName );
         }
+
         private void BtnFindKey_Click( object sender, EventArgs e )
         {
-            StringBuilder sb = new StringBuilder();
-            SearchBox searchBox = new SearchBox( sb );
+            Search();
 
-            searchBox.StartPosition = FormStartPosition.Manual;
-            searchBox.SetDesktopLocation( Cursor.Position.X, Cursor.Position.Y );
-            searchBox.ShowDialog();
-
-            foreach( DarkListItem item in this.lvEntries.Items )
-            {
-                if( item.Text == sb.ToString() )
-                {
-                    this.lvEntries.SelectItem( this.lvEntries.Items.IndexOf( item ) );
-                }
-            }
         }
 
         private void BtnEntryTimeUpdate_Click( object sender, EventArgs e )
@@ -171,6 +168,8 @@ namespace AMXXVaultViewer
             }
         }
         #endregion
+
+        #region EVENTS
         private void LvEntries_SelectedIndicesChanged( object sender, EventArgs e )
         {
             if( lvEntries.Items.Count > 0 )
@@ -189,8 +188,48 @@ namespace AMXXVaultViewer
                 UpdateTimestamp( itemEntry );
             }
         }
+        private void MainWindow_KeyDown( object sender, KeyEventArgs e )
+        {
+            if( ( e.Control && e.KeyCode == Keys.F ) || ( e.Control && e.KeyCode == Keys.S ) )
+            {
+                if( selectedFileName != null && vaultFile != null )
+                    Search();
+            }
+        }
+        #endregion
 
         #region PRIVATE FUNCTIONS
+        private void Search()
+        {
+            StringBuilder sb = new StringBuilder();
+            SearchBox searchBox = new SearchBox( sb, previousSearch );
+
+            searchBox.StartPosition = FormStartPosition.Manual;
+            searchBox.SetDesktopLocation( Cursor.Position.X, Cursor.Position.Y );
+            searchBox.ShowDialog();
+
+            bool found = false;
+            int startIndex = 0;
+            String searchValue = sb.ToString();
+
+            if( searchListItem != null )
+                startIndex = lvEntries.Items.IndexOf( searchListItem );
+
+            for( int i = startIndex + 1; i < lvEntries.Items.Count; i++ )
+            {
+                if( lvEntries.Items[i].Text.Contains( searchValue ) )
+                {
+                    searchListItem = lvEntries.Items[i];
+                    lvEntries.SelectItem( i );
+                    previousSearch = searchValue;
+                    found = true;
+                    break;
+                }
+            }
+
+            if( !found )
+                sndFailed.Play();
+        }
         private void OpenVaultFile( String fileName )
         {
             if( File.Exists( fileName ) )
@@ -283,11 +322,5 @@ namespace AMXXVaultViewer
             lblEntryCount.Visible = makeVisible;
         }
         #endregion
-
-        private void BtnPruneEntries_Click( object sender, EventArgs e )
-        {
-            PruneWindow pruneWindow = new PruneWindow();
-            pruneWindow.Show();
-        }
     }
 }

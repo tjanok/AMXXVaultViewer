@@ -399,11 +399,6 @@
             this.lblKey.TabIndex = 3;
             this.lblKey.Text = "Key:";
             // 
-            // ttEntryTips
-            // 
-            this.ttEntryTips.ShowAlways = true;
-            this.ttEntryTips.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            // 
             // MainWindow
             // 
             this.AllowDrop = true;
@@ -415,12 +410,14 @@
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainWindow";
             this.Padding = new System.Windows.Forms.Padding(1);
             this.Text = "AMXX nVault Viewer";
             this.Load += new System.EventHandler(this.FrmMain_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainWindow_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.pnlMainContainer.ResumeLayout(false);
             this.grpKeys.ResumeLayout(false);

@@ -13,10 +13,13 @@ namespace AMXXVaultViewer
     {
         private StringBuilder searchString;
 
-        public SearchBox( StringBuilder searchString )
+        public SearchBox( StringBuilder searchString, String defaultSearch = "" )
         {
             this.searchString = searchString;
             InitializeComponent();
+
+            if( defaultSearch != null )
+                tboxSearchString.Text = defaultSearch;
         }
 
         private void TboxSearchString_KeyDown( object sender, KeyEventArgs e )
